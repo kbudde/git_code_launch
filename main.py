@@ -19,8 +19,8 @@ class KeywordQueryEventListener(EventListener):
         code_command = extension.preferences["code_command"]
         root_folder = extension.preferences["root_folder"]
 
-        search_command = "find " + root_folder + " -type d -name .git -prune -exec dirname \{} \; | rev | cut -d'/' -f1 | rev"
-        
+        # allow one additional sublevel
+        search_command = "find " + root_folder + " -mindepth 2 -maxdepth 3 -type d -name .git -prune -exec dirname \{} \; | rev | cut -d'/' -f1 | rev"
         projects = []
         items = []
 
